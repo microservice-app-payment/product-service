@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> findById(
+    public ResponseEntity<ProductResponse> getProductById(
             @PathVariable(value = "id") Long id
     ){
         ProductResponse productResponse = productService.findById(id);
@@ -44,4 +44,12 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productResponse);
     }
 
+    @PutMapping("/reduceQuantity/{id}")
+    public ResponseEntity<Void> reduceQuantity(
+        @PathVariable("id") Long productId,
+        @RequestParam Long quantity
+    ){
+        productService.reduceQuantity(productId,quantity);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
