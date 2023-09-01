@@ -6,6 +6,7 @@ import com.vn.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @PreAuthorize("hasAnyAuthority('Admin')")
     @PostMapping
     public ResponseEntity<Long> addProduct(
         @RequestBody ProductRequest productRequest
@@ -35,6 +37,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
+    @PreAuthorize("hasAnyAuthority('Admin') || hasAnyAuthority('Customer') || hasAnyAuthority('SCOPE_internal')")
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getProductById(
             @PathVariable(value = "id") Long id
