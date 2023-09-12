@@ -18,6 +18,23 @@
         <spring-cloud.version>2021.0.3</spring-cloud.version>
     </properties>
     <dependencies>
+
+        <!--Monitoring-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--Monitoring-->
+
         <!-- monitoring tracing log-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -75,6 +92,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -110,6 +133,9 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <image>
+                        <name>ngochung1809/${project.name}:${project.version}</name>
+                    </image>
                 </configuration>
             </plugin>
             <!--JIB MAVEN PLUGIN-->
